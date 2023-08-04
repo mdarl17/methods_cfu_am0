@@ -77,16 +77,22 @@ puts square_2
 # 5: Write a method named check_stock that satisfies the following interaction pattern:
 # Hint: You will only write one check_stock method that checks the quantity and then prints the corresponding statement.
 def check_stock(qty, product)
-    def stock(q)
+    def stock(q, prod)
         if q > 3
-            " is stocked"
+            # Grammar police -> use 'are' if product ends with 's'.
+            # Also correcting error in case 'S' at end of product is capitalized
+            if prod.downcase.end_with?("s")
+                " - are stocked"
+            else
+                " - is stocked"
+            end
         elsif q <= 3 && q > 0
             " - running LOW"
         else
             " - OUT of stock!"
         end
     end
-    puts "#{product}#{stock(qty)}"
+    puts "#{product.capitalize}#{stock(qty, product)}"
 end
 check_stock(4, "Coffee");
 # # => "Coffee is stocked"
